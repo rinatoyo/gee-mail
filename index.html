@@ -2,17 +2,132 @@
 	<head>
 		<script src="js/mail-generator.js"></script>
 		<link href="css/style.css" rel="stylesheet" media="screen">
+		<link href="https://fonts.googleapis.com/css?family=News+Cycle" rel="stylesheet">
+		<title>Your Gee-Mail</title>
     <script>
       window.onload = function(){
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
-        // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
-        
-      };
+				// We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
+	
+
+				//add messages
+
+				// console.log(geemails)
+				// var msgArea = document.getElementById('msgArea');
+
+		  	function makeBox(elem, label, obj){
+			  	var makeElem = document.createElement(elem)
+				 	makeElem.className = label;
+					makeElem.innerHTML = obj;
+					return makeElem;
+				}
+				
+				for (var i = 0; i < geemails.length; i++){
+
+				var msgDate = makeBox('div', 'showDate', geemails[i].date);
+				msgDate.innerHTML = 'Date: ' + geemails[i].date;
+				msgArea.appendChild(msgDate);
+					
+				var person = makeBox('div', 'showSender', geemails[i].sender);
+				person.innerHTML = 'From: ' + geemails[i].sender;
+				msgArea.appendChild(person);
+
+				var msgSubject = makeBox('div', 'showSubject', geemails[i].subject);
+				msgSubject.innerHTML = 'Subject: ' + geemails[i].subject;
+				msgArea.appendChild(msgSubject);
+						
+				var msg = makeBox('div', 'showMessage', geemails[i].body);
+				msg.innerHTML = 'Message: ' + geemails[i].body;
+				msgSubject.appendChild(msg);
+
+				}
+
+
+				// hide message 
+
+				var getMsg = document.getElementsByClassName('showMessage');
+
+				for (var i = 0; i < getMsg.length; i++){
+					getMsg[i].style.display = 'none'
+				}
+
+
+				// show and hide message using event listener
+
+				var getSubj = document.getElementsByClassName('showSubject');
+
+				for (var i = 0; i < getSubj.length; i++){
+					getSubj[i].addEventListener('click', whatsUp)
+				}
+
+
+				function whatsUp(){
+					// console.log(this);
+					var bodyMsg = this.querySelector('.showMessage');
+					if(bodyMsg.style.display === 'none'){
+						bodyMsg.style.display = 'block';
+					}else{
+						bodyMsg.style.display = 'none';
+					}
+				}
+
+
+				// set counter for messages
+
+				var msgCount = document.getElementById('count');
+				var mailNum = 10;
+				// this already has 10 displayed
+
+				function startCount(newMail){
+					msgCount= newMail
+					msgCount.innerHTML = mailNum;
+				}
+
+
+				// set interval for new message
+				setInterval(addNew, 5000);
+
+				function addNew(){
+					var newMessage = getNewMessage();
+				}
+
+				
+				// setInterval(function(getNewMessage), 3000);
+
+				
+		}
     </script>
 	</head>
 	<body>
-		<div class="container" id="main">
-			Build Me!
+
+		<div class="container" id="bigBox">
+
+			<div class="container" id="geemailHeader">
+
+				<img src="assets\iconfinder_16_3319628.png" alt="" title="You've got mail!">
+				<header>Gee-Mail</header>
+
+			</div>
+					
+			<div class="container" id="sidebar">
+				
+				<ul class="navigation">
+					<a href="">Inbox 
+						<span id="count">[10]</span>
+					</a>
+					<a href="#">Drafts</a>
+					<a href="#">Sent</a>
+					<a href="">Spam</a>
+					<a href="https://www.youtube.com/watch?v=Z1SiSUrvUnk">Trash</a>
+				</ul>
+			
+			</div>
+					
+			<div class="container" id="msgArea">
+				<p>Click on subject to see message!</p>
+			</div>
+
 		</div>
+
 	</body>
 </html>
