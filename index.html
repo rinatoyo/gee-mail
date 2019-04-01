@@ -2,7 +2,7 @@
 	<head>
 		<script src="js/mail-generator.js"></script>
 		<link href="css/style.css" rel="stylesheet" media="screen">
-		<link href="https://fonts.googleapis.com/css?family=News+Cycle" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Jura|Press+Start+2P|VT323" rel="stylesheet">
 		<title>Your Gee-Mail</title>
     <script>
       window.onload = function(){
@@ -76,23 +76,70 @@
 
 				var msgCount = document.getElementById('count');
 				var mailNum = 10;
-				// this already has 10 displayed
-
-				function startCount(newMail){
-					msgCount= newMail
-					msgCount.innerHTML = mailNum;
-				}
+				msgCount.textContent = "[" + mailNum + "]";
 
 
 				// set interval for new message
-				setInterval(addNew, 5000);
+				setInterval(addNew, 10000);
 
 				function addNew(){
+					// console.log(getNewMessage())
 					var newMessage = getNewMessage();
+					// console.log(newMessage);
+					msgCount.textContent =  "[" + ++mailNum + "]";
+				
+
+				function makeNewMsgBox(newElem, newLabel, newObj){
+			  	var makeNewElem = document.createElement(newElem)
+				 	makeNewElem.className = newLabel;
+					makeNewElem.innerHTML = newObj;
+					return makeNewElem;
 				}
 
-				
-				// setInterval(function(getNewMessage), 3000);
+				var newMsgSubject = makeNewMsgBox('div', 'showNewSubject', newMessage.subject);
+				newMsgSubject.innerHTML = 'Subject: ' + newMessage.subject;
+				msgArea.prepend(newMsgSubject);
+
+				var newPerson = makeNewMsgBox('div', 'showNewSender', newMessage.sender);
+				newPerson.innerHTML = 'From: ' + newMessage.sender;
+				msgArea.prepend(newPerson);
+
+				var newMsgDate = makeNewMsgBox('div', 'showNewDate', newMessage.date);
+				newMsgDate.innerHTML = 'Date: ' + newMessage.date;
+				msgArea.prepend(newMsgDate);
+			
+				var newMsg = makeNewMsgBox('div', 'showNewMessage', newMessage.body);
+				newMsg.innerHTML = 'Message: ' + newMessage.body;
+				newMsgSubject.appendChild(newMsg);
+
+				// hide new message 
+
+				var getNewMsg = document.getElementsByClassName('showNewMessage');
+
+				// console.log(getNewMsg);
+
+				for (var i = 0; i < getNewMsg.length; i++){
+					getNewMsg[i].style.display = 'none'
+				}
+
+				// show and hide new message using event listener
+
+				var getNewSubj = document.getElementsByClassName('showNewSubject');
+
+				for (var i = 0; i < getNewSubj.length; i++){
+					getNewSubj[i].addEventListener('click', hello)
+				}
+
+				function hello(){
+					var newBodyMsg = this.querySelector('.showNewMessage');
+					if(newBodyMsg.style.display === 'none'){
+						newBodyMsg.style.display = 'block';
+					}else{
+						newBodyMsg.style.display = 'none';
+					}
+				}
+
+				}
 
 				
 		}
@@ -104,27 +151,30 @@
 
 			<div class="container" id="geemailHeader">
 
-				<img src="assets\iconfinder_16_3319628.png" alt="" title="You've got mail!">
+				<img src="assets\pixel-heart-in-an-envelope-vector-21513809.jpg" alt="" title="You've got mail!" height="100" width="100">
 				<header>Gee-Mail</header>
 
 			</div>
 					
 			<div class="container" id="sidebar">
+
+				
 				
 				<ul class="navigation">
-					<a href="">Inbox 
-						<span id="count">[10]</span>
+					<a href="http://127.0.0.1:8080/" id="withCount" target="_self">Inbox 
+						<span id="count"></span>
 					</a>
 					<a href="#">Drafts</a>
 					<a href="#">Sent</a>
-					<a href="">Spam</a>
-					<a href="https://www.youtube.com/watch?v=Z1SiSUrvUnk">Trash</a>
+					<a href="https://www.pritchettcartoons.com/spam.htm" target="_blank">Spam</a>
+					<a href="https://www.youtube.com/watch?v=Z1SiSUrvUnk" target="_blank">Trash</a>
+					<a id="note">[Click on subject to see message!]</a>
 				</ul>
 			
 			</div>
 					
 			<div class="container" id="msgArea">
-				<p>Click on subject to see message!</p>
+				
 			</div>
 
 		</div>
