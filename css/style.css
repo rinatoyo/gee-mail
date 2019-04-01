@@ -72,21 +72,36 @@ a:active {
     cursor: not-allowed;
 
 }
-
-#msgArea{
+#emails{
     background-color: whitesmoke;
-    font-family: 'Jura', sans-serif;
-    font-size: 20px;
     background-repeat: no-repeat;
     border-color: rgb(42, 41, 46);
     border-style: dashed;
     border-width: 5px;
     float: right;
     overflow: auto;
-    width: 75%;
+    width: 75.5%;
     height: 100%;
     padding-top: 0px;
-    
+}
+
+
+#msgArea{
+    font-family: 'Jura', sans-serif;
+    font-size: 20px;
+    display: inline;
+}
+
+.showDate{
+    float: right;
+    font-family: 'VT323', monospace;
+    font-size: 90%;
+}
+
+.showNewDate{
+    float: right;
+    font-family: 'VT323', monospace;
+    font-size: 90%;
 }
 
 .showSubject{
