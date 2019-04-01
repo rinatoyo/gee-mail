@@ -90,9 +90,9 @@ a:active {
 }
 
 .showSubject{
-    border-bottom-style: solid;
+    border-bottom-style: dashed;
     border-color: #3a55cc;
-    border-width: 1px;
+    border-width: 2px;
 }
 
 .showNewSubject{
