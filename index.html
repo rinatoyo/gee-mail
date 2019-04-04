@@ -89,57 +89,57 @@
 					msgCount.textContent =  "[" + ++mailNum + "]";
 				
 
-				function makeNewMsgBox(newElem, newLabel, newObj){
-			  	var makeNewElem = document.createElement(newElem)
-				 	makeNewElem.className = newLabel;
-					makeNewElem.innerHTML = newObj;
-					return makeNewElem;
-				}
+					function makeNewMsgBox(newElem, newLabel, newObj){
+				  	var makeNewElem = document.createElement(newElem)
+					 	makeNewElem.className = newLabel;
+						makeNewElem.innerHTML = newObj;
+						return makeNewElem;
+					}
 
-				var newMsgSubject = makeNewMsgBox('div', 'showNewSubject', newMessage.subject);
-				newMsgSubject.innerHTML = 'Subject: ' + newMessage.subject;
-				msgArea.prepend(newMsgSubject);
+					var newMsgSubject = makeNewMsgBox('div', 'showNewSubject', newMessage.subject);
+					newMsgSubject.innerHTML = 'Subject: ' + newMessage.subject;
+					msgArea.prepend(newMsgSubject);
 
-				var newPerson = makeNewMsgBox('div', 'showNewSender', newMessage.sender);
-				newPerson.innerHTML = 'From: ' + newMessage.sender;
-				msgArea.prepend(newPerson);
+					var newPerson = makeNewMsgBox('div', 'showNewSender', newMessage.sender);
+					newPerson.innerHTML = 'From: ' + newMessage.sender;
+					msgArea.prepend(newPerson);
 
-				var newMsgDate = makeNewMsgBox('div', 'showNewDate', newMessage.date);
-				newMsgDate.innerHTML = 'Date: ' + newMessage.date;
-				msgArea.prepend(newMsgDate);
+					var newMsgDate = makeNewMsgBox('div', 'showNewDate', newMessage.date);
+					newMsgDate.innerHTML = 'Date: ' + newMessage.date;
+					msgArea.prepend(newMsgDate);
 			
-				var newMsg = makeNewMsgBox('div', 'showNewMessage', newMessage.body);
-				newMsg.innerHTML = 'Message: ' + newMessage.body;
-				newMsgSubject.appendChild(newMsg);
+					var newMsg = makeNewMsgBox('div', 'showNewMessage', newMessage.body);
+					newMsg.innerHTML = 'Message: ' + newMessage.body;
+					newMsgSubject.appendChild(newMsg);
 
-				// hide new message 
+					// hide new message [working]
 
-				var getNewMsg = document.getElementsByClassName('showNewMessage');
-
-				// console.log(getNewMsg);
-
-				for (var i = 0; i < getNewMsg.length; i++){
+					var getNewMsg = document.getElementsByClassName('showNewMessage');
+					// console.log(getNewMsg);
+					for (var i = 0; i < getNewMsg.length; i++){
 					getNewMsg[i].style.display = 'none'
-				}
+					}
+
+				
 
 				// show and hide new message using event listener
 
 				var getNewSubj = document.getElementsByClassName('showNewSubject');
 
 				for (var i = 0; i < getNewSubj.length; i++){
-					getNewSubj[i].addEventListener('click', hello)
+					getNewSubj[0].addEventListener('click', hello)
 				}
 
 				function hello(){
-					var newBodyMsg = this.querySelector('.showNewMessage');
+					var newBodyMsg = this.querySelectorAll('.showNewMessage')[0];
 					if(newBodyMsg.style.display === 'none'){
 						newBodyMsg.style.display = 'block';
 					}else{
 						newBodyMsg.style.display = 'none';
 					}
 				}
-
-				}
+			}
+				 
 
 				
 		}
